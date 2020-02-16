@@ -1,3 +1,22 @@
+
+CREATE TABLE mytable(
+   pokedex_number INTEGER  NOT NULL PRIMARY KEY 
+  ,name           VARCHAR(12) NOT NULL
+  ,japanese_name  VARCHAR(33) NOT NULL
+  ,classfication  VARCHAR(51) NOT NULL
+  ,height_m       NUMERIC(4,1)
+  ,weight_kg      NUMERIC(5,1)
+  ,attack         INTEGER  NOT NULL
+  ,defense        INTEGER  NOT NULL
+  ,hp             INTEGER  NOT NULL
+  ,sp_attack      INTEGER  NOT NULL
+  ,sp_defense     INTEGER  NOT NULL
+  ,speed          INTEGER  NOT NULL
+  ,type1          VARCHAR(8) NOT NULL
+  ,type2          VARCHAR(8)
+  ,generation     INTEGER  NOT NULL
+  ,is_legendary   BOOLEAN  NOT NULL
+);
 UPDATE mytable SET pokedex_number = 1,name = 'Bulbasaur',japanese_name = 'Fushigidaneフシギダネ',classfication = 'Seed Pokémon',height_m = 0.7,weight_kg = 6.9,attack = 49,defense = 49,hp = 45,sp_attack = 65,sp_defense = 65,speed = 45,type1 = 'grass',type2 = 'poison',generation = 1,is_legendary = 0 WHERE pokedex_number= 1;
 UPDATE mytable SET pokedex_number = 2,name = 'Ivysaur',japanese_name = 'Fushigisouフシギソウ',classfication = 'Seed Pokémon',height_m = 1,weight_kg = 13,attack = 62,defense = 63,hp = 60,sp_attack = 80,sp_defense = 80,speed = 60,type1 = 'grass',type2 = 'poison',generation = 1,is_legendary = 0 WHERE pokedex_number= 2;
 UPDATE mytable SET pokedex_number = 3,name = 'Venusaur',japanese_name = 'Fushigibanaフシギバナ',classfication = 'Seed Pokémon',height_m = 2,weight_kg = 100,attack = 100,defense = 123,hp = 80,sp_attack = 122,sp_defense = 120,speed = 80,type1 = 'grass',type2 = 'poison',generation = 1,is_legendary = 0 WHERE pokedex_number= 3;
