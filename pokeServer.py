@@ -4,7 +4,7 @@ from flask_restful import Resource, Api
 from sqlalchemy import create_engine
 from json import dumps
 import os
-db_connect = create_engine('sqlite:///pokemon.db')
+db_connect = create_engine('sqlite:///thePokedex.db')
 app = Flask(__name__)
 api = Api(app)
 
@@ -12,8 +12,8 @@ api = Api(app)
 class Pokedex(Resource):
     def get(self):
         conn = db_connect.connect() # connect to database
-        query = conn.execute("select * from pokemon") # This line performs query and returns json result
-        return {'employees': [i[0] for i in query.cursor.fetchall()]} # Fetches first column that is Employee ID
+        query = conn.execute("select * from pokedex") # This line performs query and returns json result
+        return {'pokedex': [i[0] for i in query.cursor.fetchall()]} # Fetches first column that is Employee ID
 
     def post(self):
         conn = db_connect.connect()
@@ -39,7 +39,7 @@ class Pokedex(Resource):
                              '{13}', ''{14}', '{15}')".format(pokedex_number,name,japanese_name,
                              classfication, height_m, weight_kg, hp, attack, defense, sp_attack,
                              sp_defense, speed, type1, type2, generation, is_legendary))
-       return {'status':'success'}
+        return {'status':'success'}
 
 api.add_resource(Pokedex, '/pokedex') # Route_1
 
