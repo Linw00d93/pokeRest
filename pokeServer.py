@@ -12,8 +12,8 @@ api = Api(app)
 class Pokedex(Resource):
     def get(self):
         conn = db_connect.connect() # connect to database
-        query = conn.execute("select * from pokedex") # This line performs query and returns json result
-        return {'pokedex': [i[0] for i in query.cursor.fetchall()]} # Fetches first column that is Employee ID
+        query = conn.execute("select * from pokedex1") # This line performs query and returns json result
+        return {'pokedex1': [i[0] for i in query.cursor.fetchall()]} # Fetches first column that is Employee ID
 
     def post(self):
         conn = db_connect.connect()
@@ -41,7 +41,17 @@ class Pokedex(Resource):
                              sp_defense, speed, type1, type2, generation, is_legendary))
         return {'status':'success'}
 
-api.add_resource(Pokedex, '/pokedex') # Route_1
+class Number(Resource):
+    def get(self, pokedex_number):
+        conn = db_connect.connect()
+        query = conn.execute("select * from pokedex1 where pokedex_number =%d "  %int(pokedex_number))
+        result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
+        return jsonify(result)
 
+
+
+
+api.add_resource(Pokedex, '/pokedex') # Route_1
+api.add_resource(Number, '/pokedex/<pokedex_number>') # Route_3
 if __name__ == '__main__':
 	app.run(host = '0.0.0.0' , port= 1993, debug = False )
