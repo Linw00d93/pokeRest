@@ -8,4 +8,4 @@
 
 
 *To test that everything is working update the getPoke.py script with your local IP address and run the script 
-  *if you get a resposnse back with the information of pikachu then it works 
+ *if you get a resposnse back with the information of pikachu then it works 
