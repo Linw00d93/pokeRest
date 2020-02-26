@@ -9,11 +9,19 @@ app = Flask(__name__)
 api = Api(app)
 
 
+###############################################################################
+#pikachu
+#ash pokemon find ouut how to not return null values
+###############################################################################
+
+
+
 class Pokedex(Resource):
     def get(self):
-        conn = db_connect.connect() # connect to database
-        query = conn.execute("select * from pokedex1") # This line performs query and returns json result
-        return {'pokedex1': [i[0] for i in query.cursor.fetchall()]} # Fetches first column that is Employee ID
+        conn = db_connect.connect()
+        query = conn.execute("select * from pokedex1")
+        return {'pokedex1': [i[0] for i in query.cursor.fetchall()]}
+
 
     def post(self):
         conn = db_connect.connect()
@@ -44,14 +52,88 @@ class Pokedex(Resource):
 class Number(Resource):
     def get(self, pokedex_number):
         conn = db_connect.connect()
-        query = conn.execute("select * from pokedex1 where pokedex_number =%d "  %int(pokedex_number))
+        query = conn.execute("select * from pokedex1 where pokedex_number =%d order by name"  %int(pokedex_number))
+        result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
+        return jsonify(result)
+
+
+class Name(Resource):
+    def get(self,name):
+        conn = db_connect.connect()
+        query = conn.execute("select name from pokedex1 where name ='%s'" %str(name))
+        result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
+        return jsonify(result)
+
+class Strongest(Resource):
+    def get(self):
+        conn = db_connect.connect()
+        query = conn.execute(" select name, attack, pokedex_number, classfication, type1, type2 from pokedex1 order by attack desc limit 10 ")
+        result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
+        return (result)
+
+class Fastest(Resource):
+    def get(self):
+        conn = db_connect.connect()
+        query = conn.execute(" select name, speed, pokedex_number, classfication, type1, type2 from pokedex1 order by speed desc limit 10 ")
+        result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
+        return (result)
+
+class Heaviest(Resource):
+    def get(self):
+        conn = db_connect.connect()
+        query = conn.execute(" select name, weight, pokedex_number, classfication, type1, type2 from pokedex1 order by weight desc limit 10 ")
+        result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
+        return (result)
+
+class Lightest(Resource):
+    def get(self):
+        conn = db_connect.connect()
+        query = conn.execute(" select name, weight, pokedex_number, classfication, type1, type2 from pokedex1 order by weight asc limit 10 ")
+        result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
+        return (result)
+
+class MostHP(Resource):
+    def get(self):
+        conn = db_connect.connect()
+        query = conn.execute(" select name, hp, pokedex_number, classfication, type1, type2 from pokedex1 order by hp desc limit 10 ")
+        result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
+        return (result)
+
+class Tallest(Resource):
+    def get(self):
+        conn = db_connect.connect()
+        query = conn.execute(" select name, height, pokedex_number, classfication, type1, type2 from pokedex1 order by height desc limit 10 ")
+        result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
+        return (result)
+
+
+class Type(Resource):
+    def get(self, type):
+        conn = db_connect.connect()
+        query = conn.execute("select * from pokedex1 where type1 ='%s' order by name"  %str(type))
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
         return jsonify(result)
 
 
 
+class Legend(Resource):
+    def get(self):
+        conn = db_connect.connect()
+        query = conn.execute(" select * from pokedex1 where is_legendary= 1")
+        result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
+        return jsonify(result)
 
-api.add_resource(Pokedex, '/pokedex') # Route_1
-api.add_resource(Number, '/pokedex/<pokedex_number>') # Route_3
+
+api.add_resource(Pokedex, '/pokedex')
+api.add_resource(Number, '/pokedex/pokeNumber/<pokedex_number>')
+api.add_resource(Type, '/pokedex/type/<type>')
+api.add_resource(Name, '/pokedex/name/<name>')
+api.add_resource(Legend, '/pokedex/legendary/')
+api.add_resource(Strongest, '/pokedex/strongest/')
+api.add_resource(MostHP, '/pokedex/MostHP/')
+api.add_resource(Lightest, '/pokedex/lightest/')
+api.add_resource(Heaviest, '/pokedex/heaviest/')
+api.add_resource(Fastest, '/pokedex/fastest/')
+api.add_resource(Tallest, '/pokedex/tallest/')
 if __name__ == '__main__':
 	app.run(host = '0.0.0.0' , port= 1993, debug = False )
