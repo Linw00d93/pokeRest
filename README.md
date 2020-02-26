@@ -1,4 +1,7 @@
 # pokeRest
+A REST api that has pokemon as a database
+
+
 
 *Make sure you have python 3 install then run pip3 requirement.txt  
 *Install sql lite 3   
