@@ -1,15 +1,8 @@
 import requests
-import random
-
-
-
-
-randomNumber = random.randint(1,801)
-
 
 url = "http://localhost:1993/pokedex/"
 
-url = url + str(randomNumber)
+url = url + str(25)
 
 
 print(randomNumber)
