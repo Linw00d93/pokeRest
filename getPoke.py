@@ -1,6 +1,6 @@
 import requests
 
-url = "http://localhost:1993/pokedex/"
+url = "http://localhost:1993/pokedex/pokeNumber/"
 
 url = url + str(25)
 
