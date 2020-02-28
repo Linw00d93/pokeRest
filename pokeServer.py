@@ -96,7 +96,7 @@ class Heaviest(Resource):
 class Lightest(Resource):
     def get(self):
         conn = db_connect.connect()
-        query = conn.execute(" select name, weight, pokedex_number, classfication, type1, type2 from pokedex1 order by weight asc limit 10 where weight is not null ")
+        query = conn.execute(" select name, weight, pokedex_number, classfication, type1, type2 from pokedex1 where weight is not null order by weight asc limit 10  ")
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
         return jsonify(result)
         conn.close()
@@ -112,7 +112,7 @@ class MostHP(Resource):
 class Tallest(Resource):
     def get(self):
         conn = db_connect.connect()
-        query = conn.execute(" select name, height, pokedex_number, classfication, type1, type2 from pokedex1 order by height desc limit 10 where height is not null")
+        query = conn.execute(" select name, height, pokedex_number, classfication, type1, type2 from pokedex1 where height is not null order by height desc limit 10 ")
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
         return jsonify(result)
         conn.close()
