@@ -21,7 +21,7 @@ class Pokedex(Resource):
         conn = db_connect.connect()
         query = conn.execute("select * from pokedex1")
         return {'pokedex1': [i[0] for i in query.cursor.fetchall()]}
-	conn.close()
+        conn.close()
 
 
     def post(self):
