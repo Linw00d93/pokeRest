@@ -19,8 +19,9 @@ api = Api(app)
 class Pokedex(Resource):
     def get(self):
         conn = db_connect.connect()
-        query = conn.execute("select * from pokedex1 where name is not null order by name")
-        return {'pokedex1': [i[0] for i in query.cursor.fetchall()]}
+        query = conn.execute("select pokedex_number, name, japanese_name, generation from pokedex1 where name is not null order by name")
+        return {'pokedex': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
+        return jsonify(result)
         conn.close()
 
 
