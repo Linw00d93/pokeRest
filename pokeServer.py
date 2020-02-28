@@ -1,17 +1,10 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
 from sqlalchemy import create_engine
 db_connect = create_engine('sqlite:///thePokedex.db')
 app = Flask(__name__)
 api = Api(app)
-
-
-###############################################################################
-#ash pokemon
-###############################################################################
-
-
 
 class Pokedex(Resource):
     def get(self):
@@ -56,7 +49,6 @@ class Number(Resource):
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
         return jsonify(result)
         conn.close()
-
 
 class Name(Resource):
     def get(self,name):
@@ -123,7 +115,6 @@ class Type(Resource):
         return jsonify(result)
         conn.close()
 
-
 class Legend(Resource):
     def get(self):
         conn = db_connect.connect()
@@ -132,8 +123,7 @@ class Legend(Resource):
         return jsonify(result)
         conn.close()
 
-
-api.add_resource(Pokedex, '/pokedex')
+api.add_resource(Pokedex, '/pokedex/')
 api.add_resource(Number, '/pokedex/pokeNumber/<pokedex_number>')
 api.add_resource(Type, '/pokedex/type/<type>')
 api.add_resource(Name, '/pokedex/name/<name>')
