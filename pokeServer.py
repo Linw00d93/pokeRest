@@ -2,16 +2,13 @@
 from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
 from sqlalchemy import create_engine
-from json import dumps
-import os
 db_connect = create_engine('sqlite:///thePokedex.db')
 app = Flask(__name__)
 api = Api(app)
 
 
 ###############################################################################
-#pikachu
-#ash pokemon find ouut how to not return null values
+#ash pokemon
 ###############################################################################
 
 
