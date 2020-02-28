@@ -1,13 +1,13 @@
-pikachu 
+pikachu 25
 mimey
-dragonite
-bulbasaur 
-charizard 
-kingler 
-muk 
-snorlax
-heracross
-bayleef
+dragonite 149
+bulbasaur 1
+charizard 6
+kingler 99
+muk 89
+snorlax 143
+heracross 214
+bayleef 153
 notcowl
 totodile
 donphan
