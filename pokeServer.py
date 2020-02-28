@@ -63,7 +63,7 @@ class Number(Resource):
 class Name(Resource):
     def get(self,name):
         conn = db_connect.connect()
-        query = conn.execute("select name from pokedex1 where name ='%s'" %str(name))
+        query = conn.execute("select * from pokedex1 where name ='%s'" %str(name))
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
         return jsonify(result)
         conn.close()
@@ -73,7 +73,7 @@ class Strongest(Resource):
         conn = db_connect.connect()
         query = conn.execute(" select name, attack, pokedex_number, classfication, type1, type2 from pokedex1 order by attack desc limit 10 ")
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
-        return (result)
+        return jsonify(result)
         conn.close()
 
 class Fastest(Resource):
@@ -81,7 +81,7 @@ class Fastest(Resource):
         conn = db_connect.connect()
         query = conn.execute(" select name, speed, pokedex_number, classfication, type1, type2 from pokedex1 order by speed desc limit 10 ")
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
-        return (result)
+        return jsonify(result)
         conn.close()
 
 class Heaviest(Resource):
@@ -89,7 +89,7 @@ class Heaviest(Resource):
         conn = db_connect.connect()
         query = conn.execute(" select name, weight, pokedex_number, classfication, type1, type2 from pokedex1 order by weight desc limit 10 ")
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
-        return (result)
+        return jsonify(result)
         conn.close()
 
 class Lightest(Resource):
@@ -97,7 +97,7 @@ class Lightest(Resource):
         conn = db_connect.connect()
         query = conn.execute(" select name, weight, pokedex_number, classfication, type1, type2 from pokedex1 order by weight asc limit 10 ")
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
-        return (result)
+        return jsonify(result)
         conn.close()
 
 class MostHP(Resource):
@@ -105,7 +105,7 @@ class MostHP(Resource):
         conn = db_connect.connect()
         query = conn.execute(" select name, hp, pokedex_number, classfication, type1, type2 from pokedex1 order by hp desc limit 10 ")
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
-        return (result)
+        return jsonify(result)
         conn.close()
 
 class Tallest(Resource):
@@ -113,7 +113,7 @@ class Tallest(Resource):
         conn = db_connect.connect()
         query = conn.execute(" select name, height, pokedex_number, classfication, type1, type2 from pokedex1 order by height desc limit 10 ")
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
-        return (result)
+        return jsonify(result)
         conn.close()
 
 class Type(Resource):
