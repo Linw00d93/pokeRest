@@ -19,7 +19,7 @@ api = Api(app)
 class Pokedex(Resource):
     def get(self):
         conn = db_connect.connect()
-        query = conn.execute("select * from pokedex1")
+        query = conn.execute("select * from pokedex1 where name is not null pokedex1 order by name")
         return {'pokedex1': [i[0] for i in query.cursor.fetchall()]}
         conn.close()
 
