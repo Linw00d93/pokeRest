@@ -21,6 +21,7 @@ class Pokedex(Resource):
         conn = db_connect.connect()
         query = conn.execute("select * from pokedex1")
         return {'pokedex1': [i[0] for i in query.cursor.fetchall()]}
+	conn.close()
 
 
     def post(self):
@@ -48,6 +49,7 @@ class Pokedex(Resource):
                              classfication, height_m, weight_kg, hp, attack, defense, sp_attack,
                              sp_defense, speed, type1, type2, generation, is_legendary))
         return {'status':'success'}
+	conn.close()
 
 class Number(Resource):
     def get(self, pokedex_number):
@@ -55,6 +57,7 @@ class Number(Resource):
         query = conn.execute("select * from pokedex1 where pokedex_number =%d order by name"  %int(pokedex_number))
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
         return jsonify(result)
+	conn.close()
 
 
 class Name(Resource):
@@ -63,6 +66,7 @@ class Name(Resource):
         query = conn.execute("select name from pokedex1 where name ='%s'" %str(name))
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
         return jsonify(result)
+	conn.close()
 
 class Strongest(Resource):
     def get(self):
@@ -70,6 +74,7 @@ class Strongest(Resource):
         query = conn.execute(" select name, attack, pokedex_number, classfication, type1, type2 from pokedex1 order by attack desc limit 10 ")
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
         return (result)
+	conn.close()
 
 class Fastest(Resource):
     def get(self):
@@ -77,6 +82,7 @@ class Fastest(Resource):
         query = conn.execute(" select name, speed, pokedex_number, classfication, type1, type2 from pokedex1 order by speed desc limit 10 ")
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
         return (result)
+	conn.close()
 
 class Heaviest(Resource):
     def get(self):
@@ -84,6 +90,7 @@ class Heaviest(Resource):
         query = conn.execute(" select name, weight, pokedex_number, classfication, type1, type2 from pokedex1 order by weight desc limit 10 ")
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
         return (result)
+	conn.close()
 
 class Lightest(Resource):
     def get(self):
@@ -91,6 +98,7 @@ class Lightest(Resource):
         query = conn.execute(" select name, weight, pokedex_number, classfication, type1, type2 from pokedex1 order by weight asc limit 10 ")
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
         return (result)
+	conn.close()
 
 class MostHP(Resource):
     def get(self):
@@ -98,6 +106,7 @@ class MostHP(Resource):
         query = conn.execute(" select name, hp, pokedex_number, classfication, type1, type2 from pokedex1 order by hp desc limit 10 ")
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
         return (result)
+	conn.close()
 
 class Tallest(Resource):
     def get(self):
@@ -105,7 +114,7 @@ class Tallest(Resource):
         query = conn.execute(" select name, height, pokedex_number, classfication, type1, type2 from pokedex1 order by height desc limit 10 ")
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
         return (result)
-
+	conn.close()
 
 class Type(Resource):
     def get(self, type):
@@ -113,7 +122,7 @@ class Type(Resource):
         query = conn.execute("select * from pokedex1 where type1 ='%s' order by name"  %str(type))
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
         return jsonify(result)
-
+	conn.close()
 
 
 class Legend(Resource):
@@ -122,6 +131,7 @@ class Legend(Resource):
         query = conn.execute(" select * from pokedex1 where is_legendary= 1")
         result = {'data': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
         return jsonify(result)
+	conn.close()
 
 
 api.add_resource(Pokedex, '/pokedex')
